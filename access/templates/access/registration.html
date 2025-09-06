@@ -1,0 +1,20 @@
+{% extends "base.html" %} 
+{% load static %}
+{% block styling %} {% endblock styling %}
+{% block content %}
+    <div class="container">
+      <div class="card">
+        <div class="header">
+          <h1>Create Account</h1>
+          <p>Join us today and get started</p>
+        </div>
+
+        <div class="registration-form">
+          <form action="" hx-post="/api/register/" method="POST">
+            {% csrf_token %}
+            {% include "partials/register-form.html" %}
+          </form>
+        </div>
+      </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+{% block styling %}
+<link rel="stylesheet" href="{% static 'access/landing-page.css' %}">
+{% endblock styling %} 
+{% block content %}
+  <header>
+    <div class="logo">RoutineSync</div>
+    <div class="auth-buttons">
+      <a href="{% url "login" %}">Sign In</a>
+      <a href="{% url "registration" %}">Sign Up</a>
+    </div>
+  </header>   
+  <div class="main-content">
+    <h1>Build Habits Together</h1>
+    <p>Join others on their routines. Get notified when someone you follow starts theirs, and stay consistent together.</p>
+    <button class="cta-button">Explore Routines</button>
+  </div>
+{% endblock content %}

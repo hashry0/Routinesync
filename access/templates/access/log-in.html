@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block styling %}<link rel="stylesheet" href="{% static 'access/login.css' %}">{% endblock styling %} 
+{% block content %}
+    <div class="container">
+    <div class="card">
+      <h2 class="card-title">Sign In</h2>
+  
+      <form class="space-y-4"hx-post="/api/log-in/" >
+        {% csrf_token %}
+  
+        <!-- Email -->
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">Email</span>
+          </label>
+          <input type="email" name="email" placeholder="your.email@example.com" required />
+        </div>
+  
+        <!-- Password -->
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">Password</span>
+          </label>
+          <input type="password" name="password" placeholder="••••••••" required />
+          <label class="label">
+            <span class="label-text-alt">
+              <a href="#" class="link-primary">Forgot password?</a>
+            </span>
+          </label>
+        </div>
+  
+        <!-- Remember Me -->
+        <div class="form-control">
+          <label class="label cursor-pointer" style="gap: 0.5rem; align-items: center;">
+            <input type="checkbox" name="remember" />
+            <span class="label-text">Remember me</span>
+          </label>
+        </div>
+  
+        <!-- Submit Button -->
+        <div class="form-control">
+          <button type="submit" class="btn">Sign In</button>
+        </div>
+  
+        <!-- Divider -->
+        <div class="divider">OR</div>
+  
+        <!-- Register Link -->
+        <div class="text-center">
+          <p class="text-sm">Don't have an account? <a href={% url "registration_api" %} class="link-primary">Create one here</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+{% endblock content %}

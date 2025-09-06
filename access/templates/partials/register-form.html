@@ -1,0 +1,56 @@
+<div class="grid-two">
+  <div class="form-group">
+    <label for="first_name">First Name</label>
+    <input type="text" name="first_name" placeholder="firstname" required />
+  </div>
+
+  <div class="form-group">
+    <label for="last_name">Last Name</label>
+    <input type="text" name="last_name" placeholder="lastname" required />
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="email">Email</label>
+  <input type="email" name="email" required />
+</div><div class="form-group">
+
+  <label for="username">Username</label>
+  <input type="text" name="username" />
+</div>
+
+<div class="form-group">
+  <label for="phone_number">Phone Number</label>
+  <input type="tel" name="phone_number" />
+</div>
+
+<div class="form-group">
+  <label for="password">Password</label>
+  <input type="password" name="password" required />
+</div>
+
+<div class="form-group">
+  <label for="password2">Confirm Password</label>
+  <input type="password" name="password2" required />
+</div>
+
+<div class="form-group">
+  <label for="birthday">Date of Birth</label>
+  <input type="date" name="birthday" />
+</div>
+
+<div class="form-group" >
+  <label for="gender">Gender</label>
+  <select name="gender"hx-get = '/gender/choice/' hx-trigger = 'load' hx-swap = 'innerHTML'>
+    <option value="">Select Gender</option>
+    {% comment %} {% include "access/partials/gender-choice.html" %} {% endcomment %}
+  </select>
+</div>
+
+<div class="form-actions">
+  <button type="submit">Create Account</button>
+</div>
+
+<div class="text-center text-small">
+  <p>Already have an account? <a href="#" class="link">Sign in here</a></p>
+</div>

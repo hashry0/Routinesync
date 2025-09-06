@@ -1,0 +1,97 @@
+:root {
+    --emerald: #2ecc71;
+    --emerald-dark: #27ae60;
+    --cream: #fffaf0;
+    --butter: #fef9e7;
+    --text-dark: #2d3436;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: var(--butter);
+    color: var(--text-dark);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    background-color: var(--cream);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--emerald-dark);
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.auth-buttons a {
+    text-decoration: none;
+    padding: 0.5rem 1.2rem;
+    border: 2px solid var(--emerald);
+    color: var(--emerald-dark);
+    border-radius: 25px;
+    font-weight: 500;
+    background-color: transparent;
+    transition: 0.3s ease;
+}
+
+.auth-buttons a:hover {
+    background-color: var(--emerald);
+    color: white;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--emerald-dark);
+}
+
+p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin-bottom: 2rem;
+    color: #444;
+}
+
+.cta-button {
+    background: var(--emerald);
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 30px;
+    font-size: 1rem;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+
+.cta-button:hover {
+    background: var(--emerald-dark);
+}

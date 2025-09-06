@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+{% block styling %} <link rel="stylesheet" href="{% static 'access/homepage.css' %}">{% endblock styling %}
+
+{% block content %}
+    {% include "partials/nav-bar.html" %}
+    <div class="main-content">
+    <section class="welcome-section">
+        <h1>Welcome Back, Hello!</h1> 
+        <p>Ready to continue building your habits? Check your progress and stay consistent with your routines.</p>
+    </section>
+
+    <div class="dashboard-grid">
+        <div class="dashboard-card">
+            <h3>{{routine.title}}</h3>
+            <p>You have 3 routines scheduled for today. Stay on track and maintain your momentum!</p>
+            <a href="{% url 'routine_detail' routine.slug %}" class="card-button">View Today's Tasks</a> {% comment %} to view todays task ot the taks of people to follow {% endcomment %}
+        </div>
+
+        <div class="dashboard-card">
+            <h3>Weekly Progress</h3>
+            <p>You've completed 85% of your routines this week. Keep up the excellent work!</p>
+            {% comment %} <a href="{% url 'progress' %}" class="card-button">View Progress</a> {% endcomment %}
+        </div>
+
+        <div class="dashboard-card">
+            <h3>Following Updates</h3>
+            <p>5 people you follow have started their routines today. Get motivated by their progress!</p>
+            {% comment %} <a href="{% url 'following_activity' %}" class="card-button">See Updates</a> {% endcomment %}
+        </div>
+
+        <div class="dashboard-card">
+            <h3>Create New Routine</h3>
+            <p>Ready to build a new habit? Create a personalized routine and invite others to join you.</p>
+            <a href="{% url 'routine_title_api' %}" class="card-button">Create Routine</a>
+        </div>
+    </div>
+
+    <section class="recent-activity">
+        <h2>Recent Activity</h2>
+        
+        <div class="activity-item">
+            <div class="activity-info">
+                <div class="activity-title">Morning Workout</div>
+                <div class="activity-time">Today at 7:00 AM</div>
+            </div>
+            <span class="activity-status status-completed">Completed</span>
+        </div>
+
+        <div class="activity-item">
+            <div class="activity-info">
+                <div class="activity-title">Reading Session</div>
+                <div class="activity-time">Today at 8:30 PM</div>
+            </div>
+            <span class="activity-status status-pending">Pending</span>
+        </div>
+
+        <div class="activity-item">
+            <div class="activity-info">
+                <div class="activity-title">Meditation</div>
+                <div class="activity-time">Yesterday at 6:00 AM</div>
+            </div>
+            <span class="activity-status status-completed">Completed</span>
+        </div>
+
+        <div class="activity-item">
+            <div class="activity-info">
+                <div class="activity-title">Evening Walk</div>
+                <div class="activity-time">Yesterday at 7:00 PM</div>
+            </div>
+            <span class="activity-status status-missed">Missed</span>
+        </div>
+    </section>
+    </div>
+{% endblock content %}
