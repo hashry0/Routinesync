@@ -1,5 +1,76 @@
 {% extends "base.html" %}
-
+{% load static %}
+{% block styling %}<link rel="stylesheet" href="{% static 'routine/routine_detail.css' %}">{% endblock styling %}
 {% block content %}
-    <h1>HOLA AMIGOS</h1>
+    <header>
+        <div class="logo">RoutineSync</div>
+        <div class="nav-buttons">
+            <a href="/dashboard">Dashboard</a>
+            <a href="/routines">Browse Routines</a>
+            <a href="/profile">Profile</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="routine-header">
+            <h1 class="routine-title">{{routine.title}}</h1>
+            <div class="routine-meta">
+                <div class="author-info">
+                    <div class="author-avatar">JS</div>
+                    <span>by <strong>{{routine.author.full_name}}</strong></span>
+                </div>
+                <div class="privacy-badge">Public</div>
+                <span>Created 2 days ago</span>
+            </div>
+            <p class="routine-description">
+                Start your day with purpose and energy! This carefully crafted morning routine combines mindfulness, 
+                physical activity, and productive planning to set you up for success. Perfect for busy professionals 
+                who want to maximize their mornings and maintain consistent habits.
+            </p>
+        </div>
+        
+        <div class="tasks-section">
+
+            <div class="tasks-header">
+                <h2 class="tasks-title">Daily Tasks</h2>
+                <span class="task-count">6 tasks</span>
+            </div>
+
+
+            {% for task in tasks  %}
+                <div class="task-item">
+                    <div class="task-time">6:00 - 6:15</div>
+                    <div class="task-name">Morning meditation and breathing exercises</div>
+                </div>
+            {% endfor %}
+            {% comment %} <div class="task-item">
+                <div class="task-time">6:15 - 6:45</div>
+                <div class="task-name">Light workout or stretching routine</div>
+            </div>
+
+            <div class="task-item">
+                <div class="task-time">6:45 - 7:00</div>
+                <div class="task-name">Quick shower and get dressed</div>
+            </div>
+
+            <div class="task-item">
+                <div class="task-time">7:00 - 7:30</div>
+                <div class="task-name">Healthy breakfast preparation and eating</div>
+            </div>
+
+            <div class="task-item">
+                <div class="task-time">7:30 - 7:45</div>
+                <div class="task-name">Review daily goals and priorities</div>
+            </div>
+
+            <div class="task-item">
+                <div class="task-time">7:45 - 8:00</div>
+                <div class="task-name">Read news or educational content</div>
+            </div>
+
+            <div class="action-buttons">
+                <a href="#" class="btn btn-primary">Follow This Routine</a>
+                <a href="#" class="btn btn-secondary">Share Routine</a>
+            </div> {% endcomment %}
+        </div>
 {% endblock content %}

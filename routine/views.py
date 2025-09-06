@@ -52,4 +52,5 @@ class MyRoutinesView(TemplateView):
 class RoutineDetailView(TemplateView):
     def get(self, request, routine_slug):
         routine = models.Routine.objects.get(slug = routine_slug)
-        return render(request, 'routine/routine_detail.html', context={'routine': routine})
+        tasks = models.Todo.objects.filter (details__slug = routine_slug)
+        return render(request, 'routine/routine_detail.html', context={'routine': routine, 'tasks':tasks})

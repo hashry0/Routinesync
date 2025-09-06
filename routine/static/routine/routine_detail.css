@@ -1,0 +1,260 @@
+:root {
+    --emerald: #2ecc71;
+    --emerald-dark: #27ae60;
+    --cream: #fffaf0;
+    --butter: #fef9e7;
+    --text-dark: #2d3436;
+    --text-light: #636e72;
+    --border-light: #ddd;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: var(--butter);
+    color: var(--text-dark);
+    min-height: 100vh;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    background-color: var(--cream);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--emerald-dark);
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.nav-buttons a {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-buttons a:hover {
+    color: var(--emerald-dark);
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.routine-header {
+    background: var(--cream);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.routine-title {
+    font-size: 2.5rem;
+    color: var(--emerald-dark);
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.routine-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-light);
+}
+
+.author-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.author-avatar {
+    width: 32px;
+    height: 32px;
+    background: var(--emerald);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.privacy-badge {
+    background: var(--emerald);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.routine-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-dark);
+}
+
+.tasks-section {
+    background: var(--cream);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.tasks-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.tasks-title {
+    font-size: 1.5rem;
+    color: var(--emerald-dark);
+    font-weight: bold;
+}
+
+.task-count {
+    background: var(--emerald);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border: 2px solid var(--border-light);
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    background: white;
+    transition: all 0.3s ease;
+}
+
+.task-item:hover {
+    border-color: var(--emerald);
+    box-shadow: 0 2px 8px rgba(46, 204, 113, 0.1);
+}
+
+.task-time {
+    background: var(--butter);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: bold;
+    color: var(--emerald-dark);
+    min-width: 120px;
+    text-align: center;
+    margin-right: 1rem;
+}
+
+.task-name {
+    font-size: 1.1rem;
+    color: var(--text-dark);
+    flex: 1;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.btn {
+    padding: 0.75rem 2rem;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: var(--emerald);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--emerald-dark);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--emerald-dark);
+    border: 2px solid var(--emerald);
+}
+
+.btn-secondary:hover {
+    background: var(--emerald);
+    color: white;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-light);
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 1rem 1.5rem;
+    }
+
+    .container {
+        padding: 1rem;
+    }
+
+    .routine-title {
+        font-size: 2rem;
+    }
+
+    .routine-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .task-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .task-time {
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+}
+

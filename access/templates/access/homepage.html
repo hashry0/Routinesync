@@ -14,7 +14,7 @@
         <div class="dashboard-card">
             <h3>{{routine.title}}</h3>
             <p>You have 3 routines scheduled for today. Stay on track and maintain your momentum!</p>
-            <a href="{% url 'routine_detail' routine.slug %}" class="card-button">View Today's Tasks</a> {% comment %} to view todays task ot the taks of people to follow {% endcomment %}
+            <a href="{% url 'routine_detail' routine.slug %}" class="card-button">View {{routine.title}}'s Tasks</a> {% comment %} to view todays task ot the taks of people to follow {% endcomment %}
         </div>
 
         <div class="dashboard-card">
