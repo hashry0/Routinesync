@@ -4,7 +4,7 @@ from .models import Routine, Todo, RoutineTracker
 # Register your models here.
 
 class RoutineAdmin(admin.ModelAdmin):
-    list_display = ['get_author','title', 'slug']
+    list_display = ['get_author','title', 'created_at', 'updated_at','slug']
 
     def get_author(self, obj):
         return obj.author

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from django.core.exceptions import ObjectDoesNotExist
+from datetime import datetime, timezone
 from . import models
 
 class CreateRoutineView(TemplateView):
@@ -48,9 +49,20 @@ class MyRoutinesView(TemplateView):
     def get(self, request):
         routines = models.Todo.objects.filter (details__author = request.user)
         return render(request, 'routine/my-routine.html', context={'routines': routines})
-    
+
 class RoutineDetailView(TemplateView):
     def get(self, request, routine_slug):
         routine = models.Routine.objects.get(slug = routine_slug)
         tasks = models.Todo.objects.filter (details__slug = routine_slug)
-        return render(request, 'routine/routine_detail.html', context={'routine': routine, 'tasks':tasks})
+        current_day = datetime.now()
+        formatted_current_day = current_day.astimezone(timezone.utc)
+        created_at = routine.created_at
+
+        print(f'Current: {formatted_current_day}, Created at: {created_at}')
+        routine_age = formatted_current_day - created_at
+  
+        if routine.privacy == True:
+            priv_status = "Public"
+        else: 
+            priv_status = "Private"
+        return render(request, 'routine/routine_detail.html', context={'routine': routine, 'tasks':tasks, 'privacy': priv_status , 'routine_age': routine_age.days})

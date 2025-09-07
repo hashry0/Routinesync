@@ -19,8 +19,8 @@
                     <div class="author-avatar">JS</div>
                     <span>by <strong>{{routine.author.full_name}}</strong></span>
                 </div>
-                <div class="privacy-badge">Public</div>
-                <span>Created 2 days ago</span>
+                <div class="privacy-badge">{{privacy}}</div>
+                <span>Created {{routine_age}} days ago</span>
             </div>
             <p class="routine-description">
                 Start your day with purpose and energy! This carefully crafted morning routine combines mindfulness, 
@@ -39,8 +39,8 @@
 
             {% for task in tasks  %}
                 <div class="task-item">
-                    <div class="task-time">6:00 - 6:15</div>
-                    <div class="task-name">Morning meditation and breathing exercises</div>
+                    <div class="task-time">{{task.start_time}}-{{task.end_time}}</div>
+                    <div class="task-name">{{task.activity_name}}</div>
                 </div>
             {% endfor %}
             {% comment %} <div class="task-item">
