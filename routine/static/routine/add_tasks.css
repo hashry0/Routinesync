@@ -1,0 +1,131 @@
+    :root {
+        --emerald: #2ecc71;
+        --emerald-dark: #27ae60;
+        --cream: #fffaf0;
+        --butter: #fef9e7;
+        --text-dark: #2d3436;
+        --text-light: #636e72;
+        --border-light: #ddd;
+    }
+
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background: var(--butter);
+        color: var(--text-dark);
+    }
+
+    .add-task-form {
+        background: var(--cream);
+        border: 2px solid var(--emerald);
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin: 1rem auto;
+        box-shadow: 0 4px 12px rgba(46, 204, 113, 0.1);
+        width: 60%;
+        max-width: 500px;
+    }
+
+    .form-title {
+        color: var(--emerald-dark);
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .form-group label {
+        display: block;
+        font-weight: 500;
+        color: var(--text-dark);
+        margin-bottom: 0.25rem;
+        font-size: 0.9rem;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+        border: 1px solid var(--border-light);
+        border-radius: 6px;
+        font-size: 0.9rem;
+        font-family: 'Segoe UI', sans-serif;
+        background: white;
+        color: var(--text-dark);
+        transition: border-color 0.2s ease;
+    }
+
+    .form-group input:focus {
+        outline: none;
+        border-color: var(--emerald);
+    }
+
+    .form-group input::placeholder {
+        color: var(--text-light);
+    }
+
+    .time-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .form-buttons {
+        display: flex;
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+        justify-content: center;
+    }
+
+    .btn-add-task {
+        background: var(--emerald);
+        color: white;
+        border: none;
+        padding: 0.6rem 1.5rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        font-family: 'Segoe UI', sans-serif;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 4px rgba(46, 204, 113, 0.2);
+    }
+
+    .btn-add-task:hover {
+        background: var(--emerald-dark);
+        transform: translateY(-1px);
+    }
+
+    .btn-cancel {
+        background: transparent;
+        color: var(--text-light);
+        border: 1px solid var(--border-light);
+        padding: 0.6rem 1.5rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        font-family: 'Segoe UI', sans-serif;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn-cancel:hover {
+        background: var(--border-light);
+        color: var(--text-dark);
+    }
+
+    @media (max-width: 768px) {
+        .add-task-form {
+            width: 90%;
+        }
+
+        .time-row {
+            grid-template-columns: 1fr;
+        }
+
+        .form-buttons {
+            flex-direction: column;
+        }
+    }
