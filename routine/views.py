@@ -65,4 +65,11 @@ class RoutineDetailView(TemplateView):
             priv_status = "Public"
         else: 
             priv_status = "Private"
-        return render(request, 'routine/routine_detail.html', context={'routine': routine, 'tasks':tasks, 'privacy': priv_status , 'routine_age': routine_age.days})
+        return render(request, 'routine/routine_detail.html', context={'routine': routine, 'tasks':tasks, 
+        'privacy': priv_status , 'routine_age': routine_age.days})
+
+
+class AddTaskView(TemplateView):
+    def get(self, request, routine_slug):
+        routine = models.Routine.objects.get(slug = routine_slug)
+        return render (request, 'partials/add_task.html', context = {'routine': routine})

@@ -1,13 +1,11 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block styling %}<link rel="stylesheet" href="{% static 'partials/add_task.css' %}">{% endblock styling %} 
+{% block styling %}<link rel="stylesheet" href="{% static 'routine/add_task.css' %}">{% endblock styling %} 
 
-
-
-<div class="add-task-form">
-    <h3 class="form-title">Add New Task</h3>
-    <form>
+{% block content %}
+    <div class="add-task-form">
+        <h3 class="form-title">Add New Task</h3>
         <div class="form-group">
             <label for="task-name">Task Name</label>
             <input 
@@ -15,10 +13,8 @@
                 id="task-name" 
                 name="activity_name" 
                 placeholder="e.g., Morning meditation"
-                required
-            >
+                required>
         </div>
-
         <div class="time-row">
             <div class="form-group">
                 <label for="start-time">Start Time</label>
@@ -41,8 +37,13 @@
         </div>
 
         <div class="form-buttons">
-            <button type="submit" class="btn-add-task">Add Task</button>
-            <button type="button" class="btn-cancel">Cancel</button>
+        <button class="btn-add-task" hx-post = "{% url 'add_routine_api' routine.slug %}"
+        >Add Task
+        </button>
+        <button type="button" class="btn-cancel">Cancel</button>
         </div>
-    </form>
-</div>
+    </div>
+
+
+{% endblock content %}
+
