@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+{% block styling %}<link rel="stylesheet" href="{% static 'routine/my_routines.css' %}">{% endblock styling %}
+{% block content %}
+
+    <div class="main-content">
+        <div class="routines-header">
+            <h1>My Routines</h1>
+            <a href="{% url 'create_routine' %}" class="create-routine-btn">+ Create New Routine</a>
+        </div>
+
+        <!-- Statistics Section -->
+        <div class="routine-stats">
+            <div class="stat-card">
+                <div class="stat-number">{{ routines.count }}</div>
+                <div class="stat-label">Total Routines</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">{{ total_tasks|default:0 }}</div>
+                <div class="stat-label">Total Tasks</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">{{ routines.count }}</div>
+                <div class="stat-label">Active Routines</div>
+            </div>
+        </div>
+
+        <!-- Routines Grid -->
+        {% if routines %}
+        <div class="routines-grid">
+            {% for routine in routines %}
+            <a href="{% url 'routine_detail' routine.slug %}" class="routine-card">
+                <h3 class="routine-title">{{ routine.title }}</h3>
+                
+                <p class="routine-description">{{ routine.description|truncatewords:15 }}</p>
+
+                <div class="routine-meta">
+                    <div class="meta-item">
+                        <svg class="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
+                        <span>{{ routine.created_at|timesince }} ago</span>
+                    </div>
+                    <div class="meta-item">
+                        <svg class="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                        </svg>
+                        <span>{{ routine.todo_set.count }} tasks</span>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <h2>No Routines Yet</h2>
+            <p>Start building better habits by creating your first routine!</p>
+            <a href="{% url 'routine_title_api' %}" class="create-routine-btn">Create Your First Routine</a>
+        </div>
+        {% endif %}
+    </div>
+{% endblock content %}

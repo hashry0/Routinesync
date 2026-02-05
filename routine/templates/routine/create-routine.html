@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+{% block styling %} <link rel = "stylesheet" href = "{% static "routine\create-routine.css" %}"">{% endblock styling %}
+
+{% block content %}
+    <form hx-post = "{% url "routine_title_api" %}">
+        {% csrf_token %}
+        {% include "routine/form.html" %}
+        <button type="submit">submit</button>
+
+    </form>
+{% endblock content %}

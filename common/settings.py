@@ -181,6 +181,11 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
    
     )}
+
+AUTHENTICATION_BACKENDS = [
+    'common.backends.EmailBackend', 
+    'django.contrib.auth.backends.ModelBackend'
+]
 SIMPLE_JWT ={
     "AUTH_HEADER":["BEARER"],
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes = 4),

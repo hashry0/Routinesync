@@ -7,6 +7,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from . import serializers
 import requests
 from common import permissions
+from rest_framework.permissions import AllowAny, IsAuthenticated
+
 # Create your views here.
 class RoutineTitleApiView(APIView):
     permission_classes =[permissions.AccessPermission]
@@ -32,13 +34,13 @@ class RoutineTitleApiView(APIView):
             return Response(routine_details_serializer.errors)
 
 class RoutineTaskAPIView(APIView):
-    permission_classes =[permissions.AccessPermission]
+    permission_classes =[IsAuthenticated]
     def post(self, request, routine_slug):
         get_routine = Routine.objects.get(slug = routine_slug)
         serializer = serializers.TodoSerializer(data = request.data, context={'request':request, 'routine_slug': routine_slug})
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
+            return Response('<div class="success-message">Task added successfully!</div>')
         return Response(serializer.errors)
 
     def get(self, request, routine_slug):
@@ -46,7 +48,7 @@ class RoutineTaskAPIView(APIView):
         get_routine = Todo.objects.get(details = get_routine_details)
         serializer = serializers.TodoSerializer(get_routine)
 
-        return Response(serializer.data)
+        return Response({"data": serializer.data, "message": "successful"})
 
     def patch(self, request, routine_slug):
         try:

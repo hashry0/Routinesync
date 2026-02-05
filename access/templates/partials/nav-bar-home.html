@@ -1,0 +1,17 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'access/partials/navbar.css' %}">
+
+<header class="navbar-home">
+    <div class="nav-logo">RoutineSync</div>
+    <div class="nav-user-section">
+        <div class="nav-user-greeting">Hello, {{user.username}}!</div>
+        <nav class="nav-links">
+            <a href="{% url 'homepage' %}" class="nav-link active">Home</a>
+            <a href="{% url 'profile' user.username %}" class="nav-link">Profile</a>
+            <a href="{% url 'my_routines' %}" class="nav-link">My Routines</a>
+            <a href="#" class="nav-link">Following</a>
+            <a href="#" class="nav-link">Explore</a>
+        </nav>
+        <a href="{% url 'logout' %}" class="nav-logout-btn">Logout</a>
+    </div>
+</header>

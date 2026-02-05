@@ -7,7 +7,7 @@
     <div class="card">
       <h2 class="card-title">Sign In</h2>
   
-      <form class="space-y-4"hx-post="/api/log-in/" >
+      <form class="space-y-4"hx-post='{% url "login_api" %}'>
         {% csrf_token %}
   
         <!-- Email -->

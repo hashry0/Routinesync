@@ -5,6 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from .models import Profile, Skill, Follow
 from .serializers import RegisterSerializer, SkillSerializer, ProfileSerializer, FollowSerializer
@@ -26,8 +27,41 @@ class RegisterApiView(APIView):
             print(serializer.errors)
             return Response (serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class SessionLoginAPIView(APIView):
+    def post(self, request):
+        email = request.data.get('email')
+        password = request.data.get('password')
+        print(email, password)
+        user = authenticate(request, username = email, password = password)
+        if user is not None:
+            login(request, user)
+            response = Response({"message": "Login successful"})
+            response['HX-redirect'] = '/homepage/'
+            return response
+        else:
+            
+            response = Response({"message": "Invalid credentials"})
+            return response
+
 class MyTokenObtainPairAPIView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
+
+class CustomTokenObtainApiView(TokenObtainPairView):
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data = request.data)
+        serializer.is_valid(raise_exception = True)
+        tokens = serializer.validated_data
+
+        response = Response({'details': 'login successful'})
+
+        response.set_cookie(
+            'access_token', tokens['access'], httponly=True, secure=False, samesite='lax'
+        )
+        response.set_cookie(
+            'refresh_token', tokens['refresh'], httponly=True, secure=False, samesite='lax'
+        )
+        response["HX-Redirect"] = "/homepage/"
+        return response
 class LoginApiView(APIView):
     '''Made an api which obtain the access_tokens and the refresh_tokens from the JWT api
     - Get the the details by the user from the frontend
@@ -112,7 +146,9 @@ class FollowApiView(APIView):
             # assign the profile being followed to the 'user_followed' field in the Follow object
             user_following.user_followed = user_followed
             user_following.save()
-            return Response('hola', status=status.HTTP_201_CREATED)
+            return render(request, "partials/follow_unfollow.html", context={'current_username':request.user.username, 
+                                                                'profile_username': username,
+                                                                 'is_following': Follow.objects.filter(user_following__username = request.user.username, user_followed__username = username).exists()})
         # This IF bock checks for the keyword 'follow' is having the word 'unfollow' passed in the request data to the endpoint
         elif request.data.get('follow') == 'unfollow':
             # user_followed this get the user being followed by the logged-in user through the username in the URL to get the profile object fro the Profile Model
@@ -120,7 +156,14 @@ class FollowApiView(APIView):
             # assign the profile being followed to the 'user_followed' field in the Follow object
             instance = Follow.objects.get(user_following = request.user, user_followed = user_followed)
             instance.delete()
-            return Response('Deleted')
+            return render(request, "partials/follow_unfollow.html", context={'current_username':request.user.username, 
+                                                                'profile_username': username,
+                                                                 'is_following': Follow.objects.filter(user_following__username = request.user.username, user_followed__username = username).exists()})
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        
+        return Response(status=status.HTTP_202_ACCEPTED)
+
         
     def get(self, request, username):
         following_count = Follow.objects.filter(user_following = request.user).count()

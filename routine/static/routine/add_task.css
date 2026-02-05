@@ -78,7 +78,18 @@
         margin-top: 1.5rem;
         justify-content: center;
     }
-
+   .success-message {
+       background: #d4edda;
+       border: 2px solid var(--emerald);
+       border-radius: 8px;
+       padding: 1rem;
+       margin: 1rem 0;
+       text-align: center;
+       color: var(--emerald-dark);
+       font-weight: 600;
+       font-size: 1rem;
+       box-shadow: 0 2px 8px rgba(46, 204, 113, 0.1);
+   }
     .btn-add-task {
         background: var(--emerald);
         color: white;
@@ -129,3 +140,5 @@
             flex-direction: column;
         }
     }
+
+ 

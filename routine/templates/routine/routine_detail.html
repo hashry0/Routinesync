@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block styling %}<link rel="stylesheet" href="{% static 'routine/routine_detail.css' %}">{% endblock styling %}
+
 {% block content %}
     <header>
         <div class="logo">RoutineSync</div>
@@ -33,9 +34,10 @@
             <div class="tasks-header">
                 <h2 class="tasks-title">Daily Tasks</h2>
                 <div class="tasks-header-right">
-                    <span class="task-count">6 tasks</span>
+                    <span class="task-count">{{tasks_count}} tasks</span>
                     <form action="">
-                        <button  class="add-task-btn" hx-get = '{% url "add_task" routine.slug %}' hx-trigger = 'click' hx-target = '.task-item' hx-swap = 'afterend'>+ Add Task</button>
+                        <button  class="add-task-btn" hx-get = '{% url "add_task" routine.slug %}' 
+                        hx-trigger = 'click' hx-target = 'action-buttons' hx-swap = 'beforebegin'>+ Add Task</button>
                     </form>
                 </div>
             </div>
@@ -52,5 +54,4 @@
         </div>
     </div>
  
- {% include "partials/add_task.html" %}
 {% endblock content %}

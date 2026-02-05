@@ -3,7 +3,7 @@
 {% block styling %} <link rel="stylesheet" href="{% static 'access/homepage.css' %}">{% endblock styling %}
 
 {% block content %}
-    {% include "partials/nav-bar.html" %}
+    {% include "partials/nav-bar-home.html" %}
     <div class="main-content">
     <section class="welcome-section">
         <h1>Welcome Back, Hello!</h1> 
@@ -32,44 +32,23 @@
         <div class="dashboard-card">
             <h3>Create New Routine</h3>
             <p>Ready to build a new habit? Create a personalized routine and invite others to join you.</p>
-            <a href="{% url 'routine_title_api' %}" class="card-button">Create Routine</a>
+            <a href="{% url 'create_routine' %}" class="card-button">Create Routine</a>
         </div>
     </div>
 
     <section class="recent-activity">
         <h2>Recent Activity</h2>
-        
-        <div class="activity-item">
-            <div class="activity-info">
-                <div class="activity-title">Morning Workout</div>
-                <div class="activity-time">Today at 7:00 AM</div>
+        {% for routine in recent_routines  %}
+            <div class="activity-item">
+                <div class="activity-info">
+                    <div class="activity-title">{{routine.title}}</div>
+                    <div class="activity-time">{{routine.created_at|timesince}} ago</div>
+                </div>
+                <span class="activity-status status-completed">Completed</span>
             </div>
-            <span class="activity-status status-completed">Completed</span>
-        </div>
-
-        <div class="activity-item">
-            <div class="activity-info">
-                <div class="activity-title">Reading Session</div>
-                <div class="activity-time">Today at 8:30 PM</div>
-            </div>
+        {% endfor %}
             <span class="activity-status status-pending">Pending</span>
-        </div>
-
-        <div class="activity-item">
-            <div class="activity-info">
-                <div class="activity-title">Meditation</div>
-                <div class="activity-time">Yesterday at 6:00 AM</div>
-            </div>
-            <span class="activity-status status-completed">Completed</span>
-        </div>
-
-        <div class="activity-item">
-            <div class="activity-info">
-                <div class="activity-title">Evening Walk</div>
-                <div class="activity-time">Yesterday at 7:00 PM</div>
-            </div>
             <span class="activity-status status-missed">Missed</span>
-        </div>
     </section>
     </div>
 {% endblock content %}

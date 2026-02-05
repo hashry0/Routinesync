@@ -1,15 +1,28 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'access/partials/navbar.css' %}">
 
-<header>
-    <div class="logo">RoutineSync</div>
-    <div class="user-section">
-        <div class="user-greeting">Hello, {{user.username}}!</div>
-        <nav class="nav-menu">
-            <a href="{% url "homepage" %}">Home</a>
-            <a href="#" class="active">Profile</a>
-            <a href="#">My Routines</a>
-            <a href="#">Following</a>
-            <a href="#">Explore</a>
+<header class="navbar-main">
+    <div class="nav-logo">RoutineSync</div>
+    
+    <div class="nav-search-container">
+        <form class="nav-search-form" action="{% url 'homepage'%}" method="GET">
+            <input type="text" name="q" class="nav-search-input" placeholder="Search routines...">
+            <button type="submit" class="nav-search-btn">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+            </button>
+        </form>
+    </div>
+
+    <div class="nav-user-section">
+        <nav class="nav-links">
+            <a href="{% url 'homepage' %}" class="nav-link">Home</a>
+            <a href="{% url 'profile' user.username %}" class="nav-link">Profile</a>
+            <a href="{% url 'my_routines' %}" class="nav-link">My Routines</a>
+            <a href="#" class="nav-link">Following</a>
+            <a href="#" class="nav-link">Explore</a>
         </nav>
-        <a href="#" class="logout-btn">Logout</a> 
+        <a href="{% url 'logout' %}" class="nav-logout-btn">Logout</a>
     </div>
 </header>
