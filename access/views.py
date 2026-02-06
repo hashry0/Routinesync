@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
-from .models import Profile, Follow
+from .models import Profile, Follow, Skill
 from routine.models import Routine
 class LandingPageView(TemplateView):
     def get(self, request):
@@ -33,8 +33,13 @@ class ProfileView(TemplateView):
         username = Profile.objects.get(username = request.user.username)
         bar_username_profile = Profile.objects.get(username = kwargs['username'])
         is_following = Follow.objects.filter(user_following = username, user_followed = bar_username_profile).exists()
-        print(username.username)
-        return render (request, 'access/profile.html', context={'current_username':username.username, 
+        following_count =  Follow.objects.filter(user_following = username).count()
+        follower_count =  Follow.objects.filter(user_followed = username)
+        return render (request, 'access/profile.html', context={'current_username':username, 
                                                                 'profile_username': kwargs['username'],
-                                                                 'is_following': is_following})
-
+                                                                 'is_following': is_following,
+                                                                 'following_count': Follow.objects.filter(user_following = bar_username_profile).count(),
+                                                                 'followers_count':Follow.objects.filter(user_followed = bar_username_profile).count(),
+                                                                 'routines_count':Routine.objects.filter(author = bar_username_profile).count(),
+                                                                 'skillsets': Skill.objects.filter(profile = bar_username_profile),
+                                                                 'recent_routines': Routine.objects.filter(author = username).order_by("-created_at")[:3]})

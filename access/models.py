@@ -34,6 +34,9 @@ class Skill(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name= 'profile_skill')
     skill = models.CharField(_('Skills'),max_length=50, choices= skill_choice)
 
+    def __str__(self):
+        return self.skill
+
 class Follow(models.Model):
     user_following = models.ForeignKey(Profile, on_delete=models.CASCADE, blank= True, null=True, editable=False , related_name='user_following_profile')
     user_followed = models.ForeignKey(Profile, on_delete=models.CASCADE, blank= True, null=True, editable=False , related_name='user_followed_profile')

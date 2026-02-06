@@ -16,8 +16,8 @@ class RoutineTitleApiView(APIView):
         routine_details_serializer = serializers.RoutineSerializer(data = request.data, context = {'request': request})
         if routine_details_serializer.is_valid():
             routine_details_serializer.save()
-            return Response(routine_details_serializer.data)
-        return Response(routine_details_serializer.errors)
+            return Response({"message": routine_details_serializer.data,}, status=status.HTTP_201_CREATED)
+        return Response({"message":routine_details_serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
     
     def patch(self, request, routine_slug):
         try:
@@ -30,8 +30,8 @@ class RoutineTitleApiView(APIView):
             routine_details_serializer = serializers.RoutineSerializer( get_routine_details, data = request.data, context = {'request': request}, partial = True)
             if routine_details_serializer.is_valid():
                 routine_details_serializer.save()
-                return Response(routine_details_serializer.data)
-            return Response(routine_details_serializer.errors)
+                return Response({"message": routine_details_serializer.data,}, status=status.HTTP_201_CREATED)
+        return Response({"message":routine_details_serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 class RoutineTaskAPIView(APIView):
     permission_classes =[IsAuthenticated]
@@ -40,14 +40,12 @@ class RoutineTaskAPIView(APIView):
         serializer = serializers.TodoSerializer(data = request.data, context={'request':request, 'routine_slug': routine_slug})
         if serializer.is_valid():
             serializer.save()
-            return Response('<div class="success-message">Task added successfully!</div>')
-        return Response(serializer.errors)
-
+            return Response({"message": serializer.data,}, status=status.HTTP_201_CREATED)
+        return Response({"message":serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
     def get(self, request, routine_slug):
         get_routine_details = Routine.objects.get(slug = routine_slug)
         get_routine = Todo.objects.get(details = get_routine_details)
         serializer = serializers.TodoSerializer(get_routine)
-
         return Response({"data": serializer.data, "message": "successful"})
 
     def patch(self, request, routine_slug):
@@ -61,14 +59,14 @@ class RoutineTaskAPIView(APIView):
             serializer = serializers.TodoSerializer( get_routine, data = request.data, context={'request':request, 'routine_slug': routine_slug}, partial = True)
             if serializer.is_valid():
                 serializer.save()
-                return Response(serializer.data)
-            return Response(serializer.errors)
+                return Response({"message": serializer.data,}, status=status.HTTP_201_CREATED)
+        return Response({"message":serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 class RoutinesAPIView(APIView):
     def get(self, request):
         instance = Routine.objects.filter(privacy = True)
         serializer = serializers.RoutineTrackerSerializer(instance, many = True)
-        return Response(serializer.data)
+        return Response({"message": serializer.data,}, status=status.HTTP_201_CREATED)
 class DeleteRoutineApiView(APIView):
     permission_classes = [permissions.AccessPermission]
     def delete(self,request, routine_slug):
@@ -91,14 +89,15 @@ class MyRoutinesAPIView(APIView):
         serializer =serializers.MyroutinesSerializer(instance, many = True)
         task_serializer = serializers.TodoSerializer(task_instance, many=True)
         # return Response({"Title Data":serializer.data,  "task Data":task_serializer.data})
-        return Response (serializer.data)
+        return Response({"message": serializer.data,}, status=status.HTTP_200_OK)
+
 
 class TasksAPIView(APIView):
     permission_classes = [permissions.AccessPermission]
     def get(self, request, routine_slug):
         instance = Todo.objects.filter(details__slug = routine_slug)
         serializer =serializers.TodoSerializer(instance, many = True)
-        return Response(serializer.data)
+        return Response({"message": serializer.data,}, status=status.HTTP_200_OK)
 
 class RoutineTrackerAPIView(APIView):
     def get(self, request, routine_slug = None):

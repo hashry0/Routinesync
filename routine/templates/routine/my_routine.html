@@ -2,13 +2,36 @@
 {% load static %}
 {% block styling %}<link rel="stylesheet" href="{% static 'routine/my_routines.css' %}">{% endblock styling %}
 {% block content %}
+    
+    <!-- Add Navbar Here -->
+    <nav class="main-navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <a href="{% url 'homepage' %}">RoutineSync</a>
+            </div>
+            
+            <div class="navbar-search">
+                <input type="text" placeholder="Search routines..." class="search-input">
+                <button class="search-btn">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="navbar-links">
+                <a href="{% url 'homepage' %}" class="nav-link">Home</a>
+                <a href="{% url 'profile' user.username  %}" class="nav-link">Profile</a>
+                <a href="{% url 'my_routines' %}" class="nav-link active">My Routines</a>
+                <a href="{% url 'homepage' %}" class="nav-link">Explore</a>
+                            <a href="{% url 'create_routine' %}" class="create-routine-btn">+ Create New Routine</a>
+            </div>
+        </div>
+    </nav>
 
     <div class="main-content">
-        <div class="routines-header">
-            <h1>My Routines</h1>
-            <a href="{% url 'create_routine' %}" class="create-routine-btn">+ Create New Routine</a>
-        </div>
 
+        <!-- Rest of your content stays the same -->
         <!-- Statistics Section -->
         <div class="routine-stats">
             <div class="stat-card">

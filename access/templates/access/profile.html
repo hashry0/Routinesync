@@ -8,23 +8,23 @@
         <div class="profile-header">
             <div class="profile-avatar">JS</div>
             <div class="profile-info">
-                <h1 class="profile-name">John Smith</h1>
+                <h1 class="profile-name">{{current_username.full_name}}</h1>
                 <div class="profile-meta">
                     <div class="meta-item">
                         <span>📧</span>
-                        <span>john.smith@example.com</span>
+                        <span>{{current_username.email}}</span>
                     </div>
                     <div class="meta-item">
                         <span>📱</span>
-                        <span>+1 (555) 123-4567</span>
+                        <span>{{current_username.phone_number}}</span>
                     </div>
                     <div class="meta-item">
                         <span>🎂</span>
-                        <span>January 15, 1990</span>
+                        <span>{{current_username.birthday}}</span>
                     </div>
                     <div class="meta-item">
                         <span>📅</span>
-                        <span>Joined March 2024</span>
+                        <span>{{current_username.date_joined}}</span>
                     </div>
                 </div>
                 <p class="profile-bio">
@@ -33,7 +33,7 @@
                     to connect with like-minded individuals on their journey to self-improvement.
                 </p>
                 <div class="profile-actions">
-                    {% if current_username != profile_username  %}
+                    {% if current_username.username != profile_username  %}
                        {% include "partials/follow_unfollow.html" %}
                     {% endif %}
                     
@@ -47,10 +47,9 @@
             <div class="section">
                 <h2 class="section-title">Skills & Expertise</h2>
                 <div class="skills-container">
-                    <span class="skill-tag">Product Manager</span>
-                    <span class="skill-tag">Frontend Development</span>
-                    <span class="skill-tag">UI/UX Design</span>
-                    <span class="skill-tag">Technical Writing</span>
+                    {% for skill in skillsets  %}
+                    <span class="skill-tag">{{skill.get_skill_display}}</span> 
+                    {% endfor %}
                 </div>
             </div>
 
@@ -58,15 +57,15 @@
                 <h2 class="section-title">Profile Stats</h2>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-number">12</div>
+                        <div class="stat-number">{{routines_count}}</div>
                         <div class="stat-label">Routines</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number">248</div>
+                        <div class="stat-number">{{followers_count}}</div>
                         <div class="stat-label">Followers</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number">156</div>
+                        <div class="stat-number">{{following_count}}</div>
                         <div class="stat-label">Following</div>
                     </div>
                     <div class="stat-item">
@@ -79,36 +78,17 @@
 
         <div class="routines-section">
             <h2 class="section-title">My Routines</h2>
-            
-            <div class="routine-card">
-                <div class="routine-title">Morning Productivity Routine</div>
+            {% for routine in recent_routines  %}
+                <div class="routine-card">
+                <div class="routine-title">{{routine.title}}</div>
                 <div class="routine-meta">
                     <span>6 tasks</span>
                     <span>Public</span>
                     <span>248 followers</span>
                     <span>Created 2 days ago</span>
                 </div>
-            </div>
-
-            <div class="routine-card">
-                <div class="routine-title">Evening Wind Down</div>
-                <div class="routine-meta">
-                    <span>4 tasks</span>
-                    <span>Private</span>
-                    <span>Personal routine</span>
-                    <span>Created 1 week ago</span>
                 </div>
-            </div>
-
-            <div class="routine-card">
-                <div class="routine-title">Workout & Fitness</div>
-                <div class="routine-meta">
-                    <span>8 tasks</span>
-                    <span>Public</span>
-                    <span>92 followers</span>
-                    <span>Created 2 weeks ago</span>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 
