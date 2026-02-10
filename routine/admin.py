@@ -21,7 +21,7 @@ class RoutineTrackerAdmin(admin.ModelAdmin):
 admin.site.register(Routine, RoutineAdmin)
 
 class TodoAdmin(admin.ModelAdmin):
-    list_display = ['get_user', 'activity_name']
+    list_display = ['id', 'get_user', 'activity_name']
 
     def get_user(self, obj):
         return obj.details.author.username

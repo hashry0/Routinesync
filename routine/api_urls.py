@@ -8,6 +8,7 @@ urlpatterns = [
     path('myroutines/', api_views.MyRoutinesAPIView.as_view(), name = 'my_routines'),
     path('tasks/<slug:routine_slug>/', api_views.TasksAPIView.as_view(), name = 'all_tasks'),
     path('edit/tasks/<slug:routine_slug>/', api_views.RoutineTaskAPIView.as_view(), name = 'edit_task_api'),
+    path('edit/tasks/<slug:routine_slug>/<int:task_id>/delete/', api_views.RoutineTaskAPIView.as_view(), name = 'delete_task_api'),
     path('edit/details/<slug:routine_slug>/', api_views.RoutineTitleApiView.as_view(), name = 'edit_routine_api'),
     path('edit/delete/<slug:routine_slug>/', api_views.DeleteRoutineApiView.as_view(), name = 'delete_routine_api'),
     path('privacy/<slug:routine_slug>/', api_views.PrivacyAPIView.as_view(), name='privacy_status'),

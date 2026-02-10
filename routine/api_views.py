@@ -40,11 +40,13 @@ class RoutineTaskAPIView(APIView):
         serializer = serializers.TodoSerializer(data = request.data, context={'request':request, 'routine_slug': routine_slug})
         if serializer.is_valid():
             serializer.save()
-            return Response({"message": serializer.data,}, status=status.HTTP_201_CREATED)
+            return render(request, 'partials/add_task_success.html')
         return Response({"message":serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
-    def get(self, request, routine_slug):
+    def get(self, request, routine_slug, id = None):
         get_routine_details = Routine.objects.get(slug = routine_slug)
         get_routine = Todo.objects.get(details = get_routine_details)
+        instance = Todo.objects.filter(id = id)
+        print(instance)
         serializer = serializers.TodoSerializer(get_routine)
         return Response({"data": serializer.data, "message": "successful"})
 
@@ -61,6 +63,12 @@ class RoutineTaskAPIView(APIView):
                 serializer.save()
                 return Response({"message": serializer.data,}, status=status.HTTP_201_CREATED)
         return Response({"message":serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+    def delete(self, request,routine_slug, task_id):
+        instance = Todo.objects.filter(id = task_id)
+        instance.delete()
+        print(instance)
+        return Response("hello")
+
 
 class RoutinesAPIView(APIView):
     def get(self, request):
